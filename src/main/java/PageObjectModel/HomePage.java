@@ -17,33 +17,38 @@ public class HomePage {
 
     //String selectPdfButton = "//button[normalize-space(.)='Select PDF']";
     //String selectPdfButton = "//button[@class='HFvdW Dhs0s nOTLW Cl2SE u_VDg']//span[text()='Select PDF']";
-    Locator selectPDFButton;
+    //Locator selectPDFButton;
 
     //String saveButton = "//button[normalize-space(.)='Save']";
-    Locator saveButton;
+    //Locator saveButton;
     //String saveButton = "//button[normalize-space(.)='Save']";
 
     public HomePage(Page page) {
         this.page = page;
-        selectPDFButton = page.locator("button:has-text('Select PDF')");
-        saveButton = page.locator("button:has-text('Save')");
+        //selectPDFButton = page.locator("button:has-text('Select PDF')");
+        //saveButton = page.locator("button:has-text('Save')");
     }
 
     public void uploadFile(Path filePath) {
 
-//        FileChooser fileChooser = page.waitForFileChooser(() -> page.getByRole(AriaRole.BUTTON,
-//                new Page.GetByRoleOptions().setName(
-//                        Pattern.compile("Select PDF", Pattern.CASE_INSENSITIVE))).click());
-
-        FileChooser fileChooser = page.waitForFileChooser(() -> {
-            selectPDFButton.click();
-        });
+        FileChooser fileChooser = page.waitForFileChooser(() -> page.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName(
+                        Pattern.compile("Select PDF", Pattern.CASE_INSENSITIVE))).click());
         fileChooser.setFiles(Paths.get("test.pdf"));
 
-        //page.setInputFiles(selectPdfInput, filePath);
+//        FileChooser fileChooser = page.waitForFileChooser(() -> {
+//            selectPDFButton.click();
+//        });
+        fileChooser.setFiles(Paths.get("test.pdf"));
+
     }
 
     public void clickSaveButton() {
-        saveButton.click();
+
+        page.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName(
+                        Pattern.compile("Save", Pattern.CASE_INSENSITIVE))).click();
+
+                        //saveButton.click();
     }
 }
